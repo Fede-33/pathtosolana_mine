@@ -1,68 +1,83 @@
-use std::io;
+// main.rs
+mod data;
+mod functions;
+mod json;
 
-struct Task {
-    description: String,
-    done: bool
-}
-
-impl Task {
-    fn format_task(&self, id:usize){
-        let status = if self.done{"[X]"} else {"[ ]"};
-        println!("{} {}: {}", status, id, self.description);
-    }
-}
-
-fn list_tasks(list: &Vec<Task> ) {
-    println!("\n LISTA DE TAREAS:");
-    for (i, item) in list.iter().enumerate() {
-        item.format_task (i+1);
-    }
-}
+use std::io::{self};
+use data::*;
+use functions::*;
+use json::*;
 
 fn main() {
     println!("---GESTOR DE TAREAS---");
-
-    let mut tasks: Vec<Task> = Vec::new();
+    let mut tasks: Vec<Task> = load_tasks();
+    let mut all_tags: Vec<String> = load_tags();
+    let mut stats: Statistics = load_stats();
 
     loop {
         println!("\nIngrese un comando: ");
-        println!("agregar <descripción> / completar <id>  / listar / salir");
+        println!("\tagregar <descripción>\n\tcompletar <id>\n\teditar <id>\n\tlistar\n\teliminar <id>\n\treporte\n\tsalir");
         let mut input = String::new();
         io::stdin().read_line(&mut input).expect("Inténtelo nuevamente.");
         let input = input.trim();
 
-        if input == "salir"{
-            println!("\n---FINALIZANDO GESTOR---");
-            break;
-        }else if input.starts_with("agregar") {
-            let description = input[7..].trim().to_string();
-            if !description.is_empty() {
-                tasks.push(Task{
-                    description: description.to_string(),
-                    done: false
-                });
-                println!("\nTarea agregada: {}", description);
-            }else {
-                println!("La descripción no puede estar vacía.")
-            }
-        } else if input == "listar"{
-            list_tasks(&tasks);
-        }else if input.starts_with("completar") {
-            let id: usize = match input[9..].trim().parse(){
-                Ok(num)=> num,
-                Err(_) =>{
-                    println!("\nID no válido.");
-                    continue;
-                }
-            };
-            if id > 0 && id <= tasks.len() {
-                tasks[id-1].done = true;
-                println!("\nTarea {} completada:\n{}.", id, tasks[id-1].description);
-            } else{
-                println!("\nID no válido.");
-            }
-        }else {
-            println!("Comando no reconocido. Inténtelo otra vez.\n")
+        match &*input {
+            "salir" => {
+                println!("\n---FINALIZANDO GESTOR---");
+                save_tasks(&tasks);
+                save_tags(&all_tags);
+                save_stats(&stats);
+                break;
+            },
+            "listar" => list_tasks(&tasks),
+            "reporte" => show_stats(&stats),
+            input if input.starts_with("agregar") => {
+                let description = input[7..].trim();
+                add_task(&mut tasks, description, &mut all_tags, &mut stats);
+                save_tasks(&tasks);
+                save_tags(&all_tags);
+                save_stats(&stats);
+            },
+            input if input.starts_with("completar") => {
+                let id: usize = match input[9..].trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("\nID no válido.");
+                        continue;
+                    },
+                };
+                complete_task(&mut tasks, id, &mut stats);
+                save_tasks(&tasks);
+                save_stats(&stats);
+            },
+            input if input.starts_with("editar") => {
+                let id: usize = match input[7..].trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("\nID no válido.");
+                        continue;
+                    },
+                };
+                edit_task(&mut tasks, id, &mut all_tags);
+                save_tasks(&tasks);
+                save_tags(&all_tags);
+                save_stats(&stats);
+            },
+            input if input.starts_with("eliminar") => {
+                let id: usize = match input[9..].trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("\nID no válido.");
+                        continue;
+                    },
+                };
+                remove_task(&mut tasks, id, &mut stats);
+                save_tasks(&tasks);
+                save_stats(&stats);
+            },
+            _ => {
+                println!("\nComando no reconocido. Inténtelo otra vez.");
+            },
         }
     }
 }

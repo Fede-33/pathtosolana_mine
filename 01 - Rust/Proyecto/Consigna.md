@@ -9,6 +9,7 @@
 * **Cargar las tareas desde un archivo al iniciar el programa deserializado en formato JSON con el crate serde**
 
 # MARTES 12/8
+* **Eliminar tareas**
 * **Emitir reportes**
 * **Prioridades**
 * **Etiquetas**
