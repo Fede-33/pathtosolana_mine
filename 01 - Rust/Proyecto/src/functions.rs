@@ -1,7 +1,7 @@
 use std::io::{self};
 use crate::data::*;
 
-pub fn list_tasks(list: &Vec<Task> ) {
+pub fn list_tasks(list: &[Task] ) {
     println!("\n LISTA DE TAREAS:");
     for (i, item) in list.iter().enumerate() {
         item.format_task(i+1);
@@ -24,7 +24,7 @@ pub fn remove_task(tasks: &mut Vec<Task>, id: usize, stats: &mut Statistics) {
     }
 }
 
-pub fn complete_task(tasks: &mut Vec<Task>, id: usize, stats: &mut Statistics) {
+pub fn complete_task(tasks: &mut [Task], id: usize, stats: &mut Statistics) {
     if id > 0 && id <= tasks.len() {
         let task = &mut tasks[id - 1];
 
@@ -38,7 +38,7 @@ pub fn complete_task(tasks: &mut Vec<Task>, id: usize, stats: &mut Statistics) {
             subtask.done = true;
         }
 
-        println!("\nTarea {} completada.", id);
+        println!("\nTarea {id} completada.");
     } else {
         println!("\nID no válido.");
     }
@@ -97,7 +97,7 @@ pub fn add_task(tasks: &mut Vec<Task>, description: &str, all_tags: &mut Vec<Str
         // Caso 3: El usuario ingresa texto, se crea una nueva categoría
         } else {
             all_tags.push(tag_input.to_string());
-            println!("Categoría '{}' creada.", tag_input);
+            println!("Categoría '{tag_input}' creada.");
             break tag_input.to_string();
         }
     };
@@ -113,10 +113,10 @@ pub fn add_task(tasks: &mut Vec<Task>, description: &str, all_tags: &mut Vec<Str
     stats.added_tasks += 1;
     stats.pending_tasks += 1;
 
-    println!("\nTarea agregada: {} ({:?})", description, priority);
+    println!("\nTarea agregada: {description} ({priority:?})");
 }
 
-pub fn edit_task(tasks: &mut Vec<Task>, task_id: usize, all_tags: &mut Vec<String>) {
+pub fn edit_task(tasks: &mut [Task], task_id: usize, all_tags: &mut Vec<String>) {
     if task_id == 0 || task_id > tasks.len() {
         println!("ID de tarea no válido.");
         return;
@@ -191,14 +191,12 @@ pub fn edit_task(tasks: &mut Vec<Task>, task_id: usize, all_tags: &mut Vec<Strin
                         } else {
                             println!("ID de categoría no válido.");
                         }
+                    } else if !tag_input.is_empty() {
+                        all_tags.push(tag_input.to_string());
+                        println!("Categoría '{tag_input}' creada.");
+                        break tag_input.to_string();
                     } else {
-                        if !tag_input.is_empty() {
-                            all_tags.push(tag_input.to_string());
-                            println!("Categoría '{}' creada.", tag_input);
-                            break tag_input.to_string();
-                        } else {
-                            println!("El tag no puede estar vacío.");
-                        }
+                        println!("El tag no puede estar vacío.");
                     }
                 };
                 task.tag = new_tag;
@@ -217,7 +215,7 @@ pub fn edit_task(tasks: &mut Vec<Task>, task_id: usize, all_tags: &mut Vec<Strin
                 }
             },
             "5" => {
-                println!("Subtareas de Tarea {}:", task_id);
+                println!("Subtareas de Tarea {task_id}:");
                 for (sub_id, subtask) in task.subtasks.iter().enumerate() {
                     let sub_status = if subtask.done{"[X]"} else {"[ ]"};
                     println!("\t{} {} {}", sub_status, sub_id + 1, subtask.description);

@@ -1,16 +1,47 @@
 [
   {
-    "description": "verduras",
-    "done": false,
-    "priority": "Baja",
-    "tag": "comida",
+    "description": "compras",
+    "done": true,
+    "priority": "Media",
+    "tag": "hogar",
     "subtasks": [
       {
-        "description": "papa",
-        "done": false
+        "description": "carne\u001b[3~",
+        "done": true
       },
       {
-        "description": "batata",
+        "description": "papa",
+        "done": true
+      },
+      {
+        "description": "cebolla",
+        "done": true
+      }
+    ]
+  },
+  {
+    "description": "limpiar",
+    "done": false,
+    "priority": "Media",
+    "tag": "hogar",
+    "subtasks": []
+  },
+  {
+    "description": "estudiar",
+    "done": false,
+    "priority": "Alta",
+    "tag": "estudio",
+    "subtasks": [
+      {
+        "description": "ver clase",
+        "done": true
+      },
+      {
+        "description": "resumir",
+        "done": true
+      },
+      {
+        "description": "code",
         "done": false
       }
     ]

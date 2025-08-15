@@ -5,7 +5,7 @@ Mediante el comando **cargo doc** en la consola, es posible construir la documen
 
 Pueden usarse los comentarios para describir las características de los bloques o líneas de código, y estos se agregarán automáticamente a la documentación compilada. 
 * // comentarios que describen a la documentación general.
-* /// comentarios que dsecriben al próximo elemento del código.
+* /// comentarios que describen al próximo elemento del código.
 
 ## LIBRERÍAS:
 Mediante el comando **cargo new (nombre) --lib** en vez de crear un ejecutable del código, se lo compila como una librería, también llamadas *crates* en Rust. Cómo toda librería, puede importarse desde otro código, y también crearse la documentación de cada *Crate* que se importe al proyecto.

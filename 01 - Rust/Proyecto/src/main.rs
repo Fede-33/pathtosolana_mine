@@ -1,4 +1,3 @@
-// main.rs
 mod data;
 mod functions;
 mod json;
@@ -21,7 +20,7 @@ fn main() {
         io::stdin().read_line(&mut input).expect("Inténtelo nuevamente.");
         let input = input.trim();
 
-        match &*input {
+        match input {
             "salir" => {
                 println!("\n---FINALIZANDO GESTOR---");
                 save_tasks(&tasks);
