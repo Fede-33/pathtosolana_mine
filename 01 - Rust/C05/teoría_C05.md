@@ -4,7 +4,7 @@
 Mediante el comando **cargo doc** en la consola, es posible construir la documentación del proyecto, en formato *.html*. Mediante el comando *cargo doc --open* se abrirá en un navegador. La documentación se crea automáticamente, describiendo los componentes del código, con el mismo formato que la **Documentación de Rust:** https://doc.rust-lang.org/stable/
 
 Pueden usarse los comentarios para describir las características de los bloques o líneas de código, y estos se agregarán automáticamente a la documentación compilada. 
-* // comentarios que describen a la documentación general.
+* //! comentarios que describen a la documentación general.
 * /// comentarios que describen al próximo elemento del código.
 
 ## LIBRERÍAS:
