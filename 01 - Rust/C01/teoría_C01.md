@@ -1,5 +1,5 @@
 ## RUST ES UN MEMORY SAFE LANGUAGE:
-En lugar de asignarle al dev el manejo de memoria mediante un garbage collector, esto se resuelve a través del compilador mediante principios propios del lenguaje, que garantiza que no queden fugas de memoria, raised conditions o rferencias apuntando a espacios de memoria vacíos.
+En lugar de asignarle al dev el manejo de memoria mediante un garbage collector, esto se resuelve a través del compilador mediante principios propios del lenguaje, que garantiza que no queden fugas de memoria, race conditions o referencias apuntando a espacios de memoria vacíos.
 
 ## TIPOS DE DATO:
 
@@ -16,7 +16,7 @@ Permite el ingreso de parámetros en la línea de comando cuando se ejecuta por 
     let args: Vec<String> = env::args().collect();
     dbg!(args);
 
-Se estaría creando un Vector colectando los parámetros de consola. Los que se muestran mediante la sentencia *dbg!*. Otro ejemplo sería:
+Se estaría creando un Vector que recolecta los parámetros de consola. Los que se muestran mediante el macro *dbg!*. Otro ejemplo sería:
 
     let args: Vec<String> = env::args().collect();
     if &args[1] == "18" {
