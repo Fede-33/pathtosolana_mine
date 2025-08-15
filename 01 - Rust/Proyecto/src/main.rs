@@ -42,14 +42,14 @@ fn main() {
             },
             "listar" => list_tasks(&tasks),
             "reporte" => show_stats(&stats),
-            input if input.starts_with("agregar") => {
+            input if input.starts_with("agregar ") => {
                 let description = input[7..].trim();
                 add_task(&mut tasks, description, &mut all_tags, &mut stats);
                 save_tasks(&tasks);
                 save_tags(&all_tags);
                 save_stats(&stats);
             },
-            input if input.starts_with("completar") => {
+            input if input.starts_with("completar ") => {
                 let id: usize = match input[9..].trim().parse() {
                     Ok(num) => num,
                     Err(_) => {
@@ -61,7 +61,7 @@ fn main() {
                 save_tasks(&tasks);
                 save_stats(&stats);
             },
-            input if input.starts_with("editar") => {
+            input if input.starts_with("editar ") => {
                 let id: usize = match input[7..].trim().parse() {
                     Ok(num) => num,
                     Err(_) => {
@@ -74,7 +74,7 @@ fn main() {
                 save_tags(&all_tags);
                 save_stats(&stats);
             },
-            input if input.starts_with("eliminar") => {
+            input if input.starts_with("eliminar ") => {
                 let id: usize = match input[9..].trim().parse() {
                     Ok(num) => num,
                     Err(_) => {
