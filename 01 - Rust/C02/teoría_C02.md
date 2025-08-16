@@ -17,7 +17,7 @@ Es la memoria virtual que está reservada exclusivamente a la ejecución del pro
 * **Ejemplo:** Cuando llamas a una función, sus variables locales se guardan en la pila. Cuando la función termina, esas variables se eliminan automáticamente.
 
 ### Heap (Montón): 
-La memoria que el programa debe pedirle al sistema operativo para realizar ciertas tareas, que exceden el espacio de memoria del
+La memoria que el programa debe pedirle al sistema operativo para realizar ciertas tareas, que exceden el espacio de memoria del stack
 
 * **Organización:** Es una región de memoria de propósito general donde la memoria se asigna y desasigna de forma dinámica, es decir, en tiempo de ejecución. No sigue un orden LIFO o FIFO.
 
@@ -39,10 +39,10 @@ En Rust, cuando se define una variable que contendrá texto, es necesario difere
 * **&str:** (Slice de cadena). Una variable de texto estática, como un código, que tendrá siempre la misma longitud de caracteres, se definirá como *&str*, una referencia en el *Stack* que apunta a una ubicación de memoria compilada en el binario del programa. Es por ello que, por definición, es inmutable y no contienen los datos, sino un puntero y una longitud hacia el espacio de memoria compilado en el binario. También puede obtenerse un *&str* a partir de un *String*, es decir, que el puntero y longitud que están en el *Stack* apuntan a un espacio de memoria en el *Heap*. 
 
 ### Concatenación:
-El operador + para cadenas en Rust funciona específicamente con *String* y *&str*, específicamente, el lado izquierdo de la operación debe ser un *String*, y el lado derecho *&str* 
+El operador + para cadenas en Rust funciona con *String* y *&str*, específicamente, el lado izquierdo de la operación debe ser un *String*, y el lado derecho *&str* 
 
 ## LIFETIMES
-Cuándo se define un puntero en referencia a un espacio de memoria, utilizando la sintaxis de *& ampersand* es necesario que el compilador tenga la seguridad de que el dato exista siempre que el puntero intente acceder. Los *lifetimes*, *lifetime parameters* o *tiempos de vida*, garantizan la seguridad de la memoria del programa en tiempo de compilación, mediante una anotación que define el tiempo que será válido un pŕestamo de memoria, es decir, que el puntero y la referencia estén "vivos". la síntaxis de los lifetime es, por ejemplo, *&'a str*, donde se puede asignar cualquier letra minúscula luego del ampersand. Existe un lifetime especial *&'static* que indica que ese puntero debe ser válido durante toda la ejecución del programa.
+Cuándo se define un puntero en referencia a un espacio de memoria, utilizando la sintaxis de *& ampersand* es necesario que el compilador tenga la seguridad de que el dato exista siempre que el puntero intente acceder. Los *lifetimes*, *lifetime parameters* o *tiempos de vida*, garantizan la seguridad de la memoria del programa en tiempo de compilación, mediante una anotación que define el tiempo que será válido un pŕestamo de memoria, es decir, que el puntero y la referencia estén "vivos". La síntaxis de los lifetime es, por ejemplo, *&'a str*, donde se puede asignar cualquier letra minúscula luego del ampersand. Existe un lifetime especial *&'static* que indica que ese puntero debe ser válido durante toda la ejecución del programa.
 
 ## FUNCIONES:
 Las funciones en Rust se definen mediante la sentencia *fn* un nombre y, entre parántesis, los parámetros especificando el tipo de dato que recibirán.
@@ -83,7 +83,7 @@ Luego de la primera parte de la definición, se especifica el tipo de dato que r
 Extensión del compilador que retorna posibles optimizaciones de código, para hacerlo más robusto y asegurar buenas prácticas. Cuenta con los parámetros adicionaes *Cargo clippy --fix --allow-dirty* que muestra las recomendaciones y las aplica automáticamente.
 
 ## CARGO FORMATER:
-se encarga de formatear automáticamente tu código Rust según un estilo consistente y estandarizado. Su objetivo principal es garantizar que todo el código Rust tenga la misma apariencia, independientemente de quién lo escribió. Se ejecuta por línea de comandos mediante *cargo fmt*.
+Se encarga de formatear automáticamente tu código Rust según un estilo consistente y estandarizado. Su objetivo principal es garantizar que todo el código Rust tenga la misma apariencia, independientemente de quién lo escribió. Se ejecuta por línea de comandos mediante *cargo fmt*.
 
 ## TUPLAS:
 Es un conjunto de datos no ordenados, de diferentes tipos y 12 elementos como máximo. Para crear una tupla se debe definir como tal, definir los tipos de datos que va a contener, y luego asignarle los valores:
