@@ -204,14 +204,15 @@ Este puede ejecutarse de forma simple mediante el comando **pip install requirem
 # SEGURIDAD
 
 ## BASE 1: ACCESO Y RED
-### Capa1 - AWS Security Group (Perímetro):
+### Capa 1 - AWS Security Group (Perímetro):
 Funciona como un "firewall virtual" que controla el tráfico de los servidores. Puede permitir el tráfico exclusivamente en los puertos necesarios: 
+    
     - Puerto 22 (SSH): Para la administración remota de servidores.
     - Puerto 80 (HTTP): Para el tráfico de un servidor web no encriptado.
     - Puerto 443 (HTTPS): Para el tráfico de un servidor web encriptado.
 
-    Cómo regla de oro, el puerto 22 solo debe estar restringido una IP propia o de confianza (VPN de oficina). Nunca establecer 0.0.0.0/0 (cualquier dirección IP) para SSH. 
-### Capa2 - UFW en el Host (Firewall interno):
+  Cómo regla de oro, el puerto 22 solo debe estar restringido una IP propia o de confianza (VPN de oficina). Nunca establecer 0.0.0.0/0 (cualquier dirección IP) para SSH. 
+### Capa 2 - UFW en el Host (Firewall interno):
 **UFW** significa Uncomplicated Firewaal. Es la capa de defensa en profundidad que garantiza que, si la Capa 1 falla o estuviera mal configurada, el firewall del propio host seguirá activo. es una interfaz simple para gestionar las reglas de **iptables** el firewall de Linux.
 
         sudo ufw allow 80/tcp 
@@ -219,15 +220,15 @@ Funciona como un "firewall virtual" que controla el tráfico de los servidores. 
         sudo ufw allow from 203.0.113.4 to any port 22
         sudo ufw enable
 
-    Las reglas anteriores permiten el tráfico para los puertos HTTP y HTTPS, y restringe las conexiones SSH solo a la dirección IP 203.0.113.4. Finalmente activa el firewall con las reglas definidas.
+  Las reglas anteriores permiten el tráfico para los puertos HTTP y HTTPS, y restringe las conexiones SSH solo a la dirección IP 203.0.113.4. Finalmente activa el firewall con las reglas definidas.
 
-### Capa3 - Acceso solo por SSH:
+### Capa 3 - Acceso solo por SSH:
 Deshabilitar completamente la autenticación por contraseña en la configuración SSH, en el archivo **/etc/ssh/sshd_config** establecer:
 
         PasswordAuthentication no
         CallengeResponseAuthentication no
 
-    Solo quienes posean la clave privada pordán acceder al servidor.
+  Solo quienes posean la clave privada pordán acceder al servidor.
 
 ## BASE 2: PRIVILEGIOS Y SECRETOS
 
