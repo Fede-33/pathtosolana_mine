@@ -29,9 +29,9 @@ Todos estos campos son modificables, excepto la **key**
 Son un tipo especial de cuenta con la flag **is_excecutable** seteada a *True*. La **data** que almacenan está en el formato *dBPF bytecode*, aunque pueden haber sido escritos originalmente en Rust, C/C++, Python, Assembly, Typescript (Poseidon). Los programas son *stateless* (sin estado), no almacenan datos de forma estable dentro de ellos mismos, tan solo la lógica del código para leer o modificar los datos de otras cuentas. Esta separación de lógica y datos permite que los Smart Contracts en Solana puedan ejecutarse de forma paralela. Para que una cuenta invoque a un programa y le sea permitido cambiar la información de otra cuenta, la cuenta que invoca debe ser *owner* de la cuenta a modificar. Finalmente, los programas además de procesar **instrucciones**, pueden enviarlas a otros programas, son componibles entre sí.
 
 ### Instructions:
-Su esctructura se compone de los siguientes campos:
+Su esctructura reside en un cliente off-chain, y se compone de los siguientes campos:
 * **program_id:** La identificación del programa al que se está llamando.
-* **keys:** Una lista de cuentas, cada una con una estructura de arreglo, que contenie:
+* **keys:** Una lista de cuentas, cada una con una estructura de arreglo, que contiene:
     - **key:** Clave pública para identificarla.
     - **is_mutable:** Si es o no mutable.
     - **is_signer:** Si es o no firmante, es decir, si el validador tiene que verificar la transacción criptográficamente. 
