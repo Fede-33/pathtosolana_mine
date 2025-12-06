@@ -41,7 +41,7 @@ Las variables que se almacenan en el *stack* porque son de un tamaño conocido (
 Esto sí funciona porque un integer es un tipo de dato simple con un tamaño fijo y conocido en tiempo de compilación, por lo que puede duplicarse en el *stack*. 
 
 ### Tuplas:
-Las tuplas tenrán el *copy trait*, si cada uno de sus valores también lo tienen. De lo contrario, la tupla completa carecerá del *copy trait*. Por ejemplo:
+Las tuplas tendrán el *copy trait*, si cada uno de sus valores también lo tienen. De lo contrario, la tupla completa carecerá del *copy trait*. Por ejemplo:
 
     (i32, bool, char) //copy trait
     (i32, bool, char, &str) //copy trait
@@ -113,7 +113,7 @@ Es el proceso de acceder al espacio de memoria al que apunta una referencia, don
     println!("z = {}", z); 
     println!("*y = {}", *y); 
 
-En este caso, *x* es una variable en el *stack*. *y* se define como una referencia que apunta a *x*. Y *z* toma la referencia *y*, pero al res-referenciarlo, recupera el valor del espacio de memoria y se lo asigna directamente a *z*. Al ser enteros y tener el *copy trait*, ahora *x* y *z* tienen ambos, un lugar de memoria en el *stack* en el que almacenan el mismo dato. Para las referencias mutables, el mecanismo es similar, pero con la particularidad de que, al desreferenciar, se concede autorización para modificar el dato original guardado en memoria:  
+En este caso, *x* es una variable en el *stack*. *y* se define como una referencia que apunta a *x*. Y *z* toma la referencia *y*, pero al des-referenciarlo, recupera el valor del espacio de memoria y se lo asigna directamente a *z*. Al ser enteros y tener el *copy trait*, ahora *x* y *z* tienen ambos, un lugar de memoria en el *stack* en el que almacenan el mismo dato. Para las referencias mutables, el mecanismo es similar, pero con la particularidad de que, al desreferenciar, se concede autorización para modificar el dato original guardado en memoria:  
 
     let mut a = 10; 
     let b = &mut a; 
